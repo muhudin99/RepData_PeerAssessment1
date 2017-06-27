@@ -1,11 +1,13 @@
-# Reproducible Research: Peer Assessment 1
+# Reproducible Research: Project 1
+Muhidin M.  
 
 
 ## 1. Loading and preprocessing the data
 
 ```r
-# Loading the data and viewing the summary
-activity <- read.csv("activity.csv")
+# downloading the data and viewing its summary statistics
+download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", destfile = "./data/activity.zip")
+activity <- read.csv(unzip("./data/activity.zip", exdir = "./data"))
 summary(activity)
 ```
 
@@ -68,6 +70,14 @@ y <- aggregate(steps~interval,activity,mean)
 with(y, plot(interval, steps, type = "l"))
 # identifying the 5-minute interval that contain the max number of steps
 max_point <- y[which.max(y$steps),]$interval
+max_point
+```
+
+```
+## [1] 835
+```
+
+```r
 # highlighting the maximum number of steps with vertical redline
 abline(v = max_point, col = "red")
 ```
